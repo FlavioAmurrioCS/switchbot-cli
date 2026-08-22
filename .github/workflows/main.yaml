@@ -25,7 +25,7 @@ jobs:
     env:
       UV_PYTHON: ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install uv and set the python version
         uses: astral-sh/setup-uv@v7
@@ -42,7 +42,7 @@ jobs:
       - test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install uv and set the python version
         uses: astral-sh/setup-uv@v7
