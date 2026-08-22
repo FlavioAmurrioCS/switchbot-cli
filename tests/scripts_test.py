@@ -15,7 +15,10 @@ logger = logging.getLogger(__name__)
 def entrypoints() -> Generator[tuple[str, str], None, None]:
     with open("pyproject.toml", "rb") as f:
         pyproject = tomllib.load(f)
-    yield from pyproject["project"]["scripts"].items()
+    for name, target in pyproject["project"]["scripts"].items():
+        assert isinstance(name, str)
+        assert isinstance(target, str)
+        yield name, target
 
 
 @pytest.mark.parametrize("pair", entrypoints())
