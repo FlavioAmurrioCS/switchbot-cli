@@ -2,16 +2,10 @@ from __future__ import annotations
 
 import logging
 import subprocess
-import sys
+import tomllib  # type: ignore[import-not-found,unused-ignore]
 from typing import TYPE_CHECKING
 
 import pytest
-
-if sys.version_info >= (3, 11):
-    import tomllib
-else:
-    import tomli as tomllib  # type: ignore[import-not-found,unused-ignore]
-
 
 if TYPE_CHECKING:
     from collections.abc import Generator
