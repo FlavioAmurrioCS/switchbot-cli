@@ -2,16 +2,10 @@ from __future__ import annotations
 
 import logging
 import subprocess
-import sys
+import tomllib  # type: ignore[import-not-found,unused-ignore]
 from typing import TYPE_CHECKING
 
 import pytest
-
-if sys.version_info >= (3, 11):
-    import tomllib
-else:
-    import tomli as tomllib  # type: ignore[import-not-found,unused-ignore]
-
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -21,7 +15,10 @@ logger = logging.getLogger(__name__)
 def entrypoints() -> Generator[tuple[str, str], None, None]:
     with open("pyproject.toml", "rb") as f:
         pyproject = tomllib.load(f)
-    yield from pyproject["project"]["scripts"].items()
+    for name, target in pyproject["project"]["scripts"].items():
+        assert isinstance(name, str)
+        assert isinstance(target, str)
+        yield name, target
 
 
 @pytest.mark.parametrize("pair", entrypoints())

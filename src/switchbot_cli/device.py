@@ -8,19 +8,23 @@ from typing import cast
 
 import bleak
 import bleak.exc
-from switchbot import GetSwitchbotDevices
-from switchbot import SwitchbotCurtain
-from switchbot.adv_parser import parse_advertisement_data
-from switchbot.devices.device import CharacteristicMissingError
-from switchbot.devices.device import SwitchbotOperationError
-from switchbot.discovery import CONNECT_LOCK
+from switchbot import GetSwitchbotDevices  # pyright: ignore[reportMissingTypeStubs]
+from switchbot import SwitchbotCurtain  # pyright: ignore[reportMissingTypeStubs]
+from switchbot.adv_parser import parse_advertisement_data  # pyright: ignore[reportMissingTypeStubs]
+from switchbot.devices.device import (  # pyright: ignore[reportMissingTypeStubs]
+    CharacteristicMissingError,
+)
+from switchbot.devices.device import (  # pyright: ignore[reportMissingTypeStubs]
+    SwitchbotOperationError,
+)
+from switchbot.discovery import CONNECT_LOCK  # pyright: ignore[reportMissingTypeStubs]
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
     from bleak.backends.device import BLEDevice
     from bleak.backends.scanner import AdvertisementData
-    from switchbot.models import SwitchBotAdvertisement
+    from switchbot.models import SwitchBotAdvertisement  # pyright: ignore[reportMissingTypeStubs]
 
 
 class CurtainError(RuntimeError):
@@ -100,7 +104,9 @@ def _from_raw(raw: int, open_target: int, closed_target: int) -> int:
 async def _scan(scan_timeout: int = _DISCOVERY_SCAN_TIMEOUT) -> dict[str, SwitchBotAdvertisement]:
     return cast(
         "dict[str, SwitchBotAdvertisement]",
-        await GetSwitchbotDevices().discover(scan_timeout=scan_timeout),
+        await GetSwitchbotDevices().discover(  # pyright: ignore[reportUnknownMemberType]
+            scan_timeout=scan_timeout
+        ),
     )
 
 
