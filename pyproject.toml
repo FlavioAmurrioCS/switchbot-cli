@@ -143,6 +143,7 @@ select = [
 ]
 ignore = [
   "COM812",  # missing-trailing-comma
+  "CPY",     # flake8-copyright
   "D",       # pydocstyle
   "ERA001",  # commented-out-code
   "EXE003",  # shebang-missing-python
